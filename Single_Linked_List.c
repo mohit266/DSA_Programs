@@ -8,7 +8,7 @@ void add_at_after(void);
 int length(void);
 void display(void);
 void delete(void);
-
+void swap_node(void);
 
 struct node{
     int data;
@@ -31,7 +31,8 @@ void main()
         printf("4.Length\n");
         printf("5.Display\n");
         printf("6.Delete\n");
-        printf("7.Quit\n");
+        printf("7.Swap Adjacent nodes\n");
+        printf("8.Quit\n");
 
         printf("Enter your choice : ");
         scanf("%d",&ch);
@@ -64,6 +65,10 @@ void main()
                 break;
 
             case 7:
+                swap_node();
+                break;
+
+            case 8:
                 exit(10);
                 
             default:
@@ -217,6 +222,28 @@ void delete()
         p->link = q->link;
         q->link = NULL;
         free(q);
+    }   
+}
+
+void swap_node()
+{
+    struct node* temp, *r, *q;
+    int i = 1,loc;
+
+    printf("Enter the location of node : ");
+    scanf("%d",&loc);
+
+    temp = root;
+
+    while(i<loc-1)
+    {
+        temp = temp->link;
+        i++;
     }
-    
+    q = temp->link;
+    r = q->link;
+    q->link = r->link;
+    r->link = q;
+    temp->link = r;
+
 }
